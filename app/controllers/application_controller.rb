@@ -1,8 +1,9 @@
 class ApplicationController < ActionController::API
-    include JwtToken
+    extend JwtToken
     before_action :authenticate_user
 
     private
+
     def authenticate_user
       header = request.headers['Authorization']
       header = header.split(' ').last if header
