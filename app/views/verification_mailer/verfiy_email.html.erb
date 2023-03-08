@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h5> Hello <%= @user.name%></h5>
+    <p>
+      Thanks for registering! To verify your email click the URL below.
+      <%=  user_url(@user.verification_token) %>
+    </p>
+    <p>
+    </p>
+    <p>Thanks.</p>
+  </body>
+</html>
+Copy
