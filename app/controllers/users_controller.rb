@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     def create
       @user = User.new(user_params)
       if @user.save
-        VerificationMailer.verfiy_email(@user).deliver
+        VerificationMailer.verfiy_email(@user).deliver_later
         @verified_user = VerifiedUser.create(user: @user)
         render json: {message: "user created successfully please verify your email"}, status: 201
       else
@@ -34,14 +34,9 @@ class UsersController < ApplicationController
       user = User.find_by_verification_token(params[:verification_token])
       if user
         user.email_activate
-        # flash[:success] = "Welcome to the Sample App! Your email has been confirmed.
-        # Please sign in to continue."
-        # redirect_to signin_url
         render json:{message: "Email is conrifmed"}
       else
-        # flash[:error] = "Sorry. User does not exist"
-        # redirect_to root_url
-        render json:{message: "Sorry. User does not exist"}
+        render json:{message: "Sorry. User does not exist or email already verified"}
       end
     end
 
